@@ -27,11 +27,23 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// WebSocketConnection is a wrapper
+type WebSocketConnection struct {
+	*websocket.Conn
+}
+
 // WsJsonResponse defines the name sent back from the websocket
 type WsJsonResponse struct {
 	Action      string `json:"action"`
 	Message     string `json:"string"`
 	MessageType string `json:"message_type"`
+}
+
+// WsPaylod defines the type of information being sent to the server
+type WsPaylod struct {
+	Action  string              `json:"action"`
+	Message string              `json:"message"`
+	Con     WebSocketConnection `json:"-"`
 }
 
 // WSEndpoint upgrades the connection to websocket
